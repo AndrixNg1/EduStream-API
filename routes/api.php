@@ -73,3 +73,10 @@ Route::delete('lessons/{lesson}', [LessonController::class,'destroy']);
 
 // stream endpoint (protected) - returns signed URL
 Route::get('lessons/{lesson}/stream', [LessonController::class,'stream']);
+
+
+Route::prefix('v1')->group(function () {
+    Route::apiResource('chapters.lessons', LessonController::class);
+    Route::get('local/lesson-stream/{streamId}', [\App\Http\Controllers\LocalStreamController::class,'stream'])
+         ->name('local.lesson.stream');
+});
