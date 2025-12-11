@@ -7,6 +7,7 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ChapterController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\LocalStreamController;
+use App\Http\Controllers\ProgressController;
 use App\Models\LessonStream;
 
 /*
@@ -88,4 +89,10 @@ Route::prefix('v1')->group(function () {
      */
     Route::apiResource('chapters.lessons', LessonController::class)
          ->only(['index', 'store', 'show', 'update', 'destroy']);
+
+    Route::middleware('auth:sanctum')->group(function () {
+    Route::post('lessons/{lesson}/progress', [ProgressController::class, 'update']);
+    Route::get('courses/{course}/progress', [ProgressController::class, 'courseProgress']);
+});
+
 });
