@@ -3,13 +3,9 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\CourseController;
 
-// Optional Laravel default route
-Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
-    return $request->user();
-});
-
-// API v1
+// API v1 pour AUTH
 Route::prefix('v1')->group(function () {
 
     // Public Auth Endpoints
@@ -22,4 +18,9 @@ Route::prefix('v1')->group(function () {
         Route::get('auth/me', [AuthController::class, 'me']);
     });
 
+});
+
+// APi v1 pour course
+Route::middleware('auth:sanctum')->group(function () {
+    Route::apiResource('courses', CourseController::class);
 });

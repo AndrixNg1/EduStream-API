@@ -47,6 +47,19 @@ class AuthController extends Controller
             ], Response::HTTP_UNAUTHORIZED);
         }
 
+        /**
+         *
+         * if (method_exists($user, 'hasVerifiedEmail') && ! $user->hasVerifiedEmail()) {
+         *   return response()->json([
+         *       'message' => 'Email not verified'
+         *   ], Response::HTTP_FORBIDDEN);
+        * }
+         *
+         *
+         */
+        // Option: check email verified
+
+
         // create token
         $token = $user->createToken('api-token')->plainTextToken;
 
